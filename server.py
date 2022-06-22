@@ -10,6 +10,7 @@ global model, audio_loader
 
 input_wav_save_path = os.environ.get("INPUT_WAV_SAVE_PATH")
 output_wav_save_path= os.environ.get("OUTPUT_WAV_SAVE_PATH")
+listen_port = os.environ.get("SERVER_PORT")
 
 app = Flask(__name__)
 
@@ -23,7 +24,7 @@ def separate() -> str:
     video_service = VideoService(video_id, input_wav_save_path , "webm")
     wav_path = video_service.convertVideo()
     separate_service = SeparateService(wav_path, model, audio_loader, 16000, video_id, output_path=output_wav_save_path)
-    
+
     accompaniment_path = separate_service.separate()
     response: str = {
         "accompaniment_path": accompaniment_path,
