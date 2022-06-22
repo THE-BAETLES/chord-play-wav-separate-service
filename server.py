@@ -1,6 +1,4 @@
-from flask import app, Flask, request
-import spleeter
-from spleeter.separator import Separator
+from flask import app, Flask, request,  jsonify
 from services.SeparateService import SeparateService
 from services.VideoService import VideoService
 from spleeter.audio.adapter import AudioAdapter
@@ -9,8 +7,6 @@ import os
 
 load_dotenv()
 global model, audio_loader
-model = Separator('spleeter:2stems')
-audio_loader = AudioAdapter.default()
 
 input_wav_save_path = os.environ.get("INPUT_WAV_SAVE_PATH")
 output_wav_save_path= os.environ.get("OUTPUT_WAV_SAVE_PATH")
@@ -29,8 +25,15 @@ def separate() -> str:
 
     separate_service = SeparateService(wav_path, model, audio_loader, 16000, video_id, output_path=output_wav_save_path)
 
-    response: str = "accompaniment save path"
-    pass
+    accompaniment_path = separate_service.separate()
+
+    
+    response: str = {
+        "accompaniment_path": accompaniment_path,
+        "videoId": video_id
+    }
+
+    return jsonify(response)
 
 
 if __name__ == "__main__":

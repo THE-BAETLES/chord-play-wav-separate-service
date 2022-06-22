@@ -17,7 +17,6 @@ class VideoService:
 
         audio.download(filepath=self.save_path)
 
-
     def ffmpegConvert(self):
         os.system(f"ffmpeg -i {os.path.basename(self.save_path)} -vn -ar 16000 -ac 2 -ab 192k -f mp3 {os.path.join(self.save_folder, self.video_url)}.mp3")
 
