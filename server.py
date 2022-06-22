@@ -22,12 +22,9 @@ def separate() -> str:
     #should modify later
     video_service = VideoService(video_id, input_wav_save_path , "webm")
     wav_path = video_service.convertVideo()
-
     separate_service = SeparateService(wav_path, model, audio_loader, 16000, video_id, output_path=output_wav_save_path)
-
-    accompaniment_path = separate_service.separate()
-
     
+    accompaniment_path = separate_service.separate()
     response: str = {
         "accompaniment_path": accompaniment_path,
         "videoId": video_id
