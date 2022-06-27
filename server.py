@@ -29,11 +29,10 @@ def separate() -> str:
     
     print("wav_path =", wav_path)
     separate_service = SeparateService(wav_path, 16000, video_id, output_path=output_wav_save_path)
-
     accompaniment_path = separate_service.separate()
 
     response = {
-        "accompaniment_path": accompaniment_path,
+        "accompanimentPath": accompaniment_path,
         "videoId": video_id
     }
 
@@ -42,4 +41,4 @@ def separate() -> str:
 
 if __name__ == "__main__":
     print(f"[Music Separate Engine Server] start listen on {listen_port}")
-    app.run(host='0.0.0.0',port=3000)
+    app.run(host='0.0.0.0',port=listen_port)
