@@ -11,7 +11,7 @@ class VideoService:
         self.save_path = os.path.join(save_folder, video_id + f".{save_extension}")
         self.video_url = video_url
 
-    def convertVideo(self):
+    def convert_video(self):
         video_download_start_time = time.time()
         print("Webm to Audio convert start")
         
@@ -24,22 +24,22 @@ class VideoService:
         print(f"Webm to Audio convert end in {time.time() - video_download_start_time}s save on {self.save_path}")
 
 
-    def ffmpegConvert(self):
+    def ffmpeg_convert(self):
         print("FFmpeg convert start")
-        ffmpeg_save_path =  {os.path.join(self.save_folder, self.video_id)}.mp3
+        ffmpeg_save_path =  f"{os.path.join(self.save_folder, self.video_id)}.mp3"
 
         if  not os.path.exists(ffmpeg_save_path):
             ffmpeg_start_time = time.time()
-            os.system(f"ffmpeg -i {self.save_path} -vn -ar 16000 -ac 2 -ab 192k -f mp3 {os.path.join(self.save_folder, self.video_id)}.mp3")
+            os.system(f"ffmpeg -i {self.save_path} -vn -ar 16000 -ac 2 -ab 192k -f mp3 {ffmpeg_save_path}")
             print(f"FFmpeg convert end in {time.time() - ffmpeg_start_time}")
         
-    def saveToVolume(self) -> str:
+    def save_to_volume(self) -> str:
         
-        self.convertVideo()
+        self.convert_video()
 
         assert os.path.exists(self.save_path) == True
 
-        self.ffmpegConvert()
+        self.ffmpeg_convert()
 
         return os.path.join(self.save_folder, self.video_id + ".mp3")
 

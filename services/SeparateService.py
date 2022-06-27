@@ -1,6 +1,5 @@
 import os
 
-from pyparsing import rest_of_line
 
 class SeparateService:
     def __init__(self, path: str, sample_rate:int, video_id: str, output_path: str) -> None:
@@ -29,8 +28,12 @@ class SeparateService:
             return result
 
         print(f"Spleeter separate start input path: {self.path}")
-        # research version : os.system(f"spleeter separate -i {self.path} -o {self.output_path}")
-        os.system(f"spleeter separate  -o {self.output_path} {self.path}")
+        # development version
+        # os.system(f"spleeter separate  -o {self.output_path} {self.path}")
+
+        # research docker container version
+        os.system(f"spleeter separate -i {self.path} -o {self.output_path}")
+
 
         print(f"Spleeter separate done output path: {result}")
         return result
