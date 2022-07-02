@@ -35,4 +35,4 @@ def separate() -> str:
 
 if __name__ == "__main__":
     print(f"[Music Separate Engine Server] start listen on {listen_port}")
-    app.run(host='0.0.0.0',port=1234)
+    app.run(host='0.0.0.0',port=listen_port)

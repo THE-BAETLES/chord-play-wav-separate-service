@@ -19,7 +19,7 @@ class SeparateService:
         return self
         pass
 
-    def __exit__(self, type, value, traceback):
+    def __exit__(self, *args):
         if os.path.exists(self.path):
             os.remove(self.path)
 
