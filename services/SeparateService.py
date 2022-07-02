@@ -15,6 +15,13 @@ class SeparateService:
         self.video_id = video_id
         self.output_path = output_path
 
+    def __enter__(self):
+        return self
+        pass
+
+    def __exit__(self, type, value, traceback):
+        if os.path.exists(self.path):
+            os.remove(self.path)
 
     def separate(self) -> str:
         """
