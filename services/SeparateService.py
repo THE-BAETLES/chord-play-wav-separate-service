@@ -40,6 +40,7 @@ class SeparateService:
 
         # research docker container version
         os.system(f"spleeter separate -i {self.path} -o {self.output_path}")
+        # os.system(f"spleeter separate -o {self.output_path} {self.path}")
 
 
         print(f"Spleeter separate done output path: {result}")

@@ -20,7 +20,7 @@ def separate() -> str:
     request_params = request.args.to_dict()
     video_id: str = request_params["videoId"]
 
-    with VideoService(get_youtube_url(video_id),video_id, input_wav_save_path , "webm") as v:
+    with VideoService(get_youtube_url(video_id),video_id, input_wav_save_path , "mp3") as v:
         wav_path = v.save_to_volume()
 
     with SeparateService(wav_path, 16000, video_id, output_path=output_wav_save_path) as s:
@@ -32,6 +32,10 @@ def separate() -> str:
     }
 
     return jsonify(response)
+
+def test():
+    
+    pass
 
 if __name__ == "__main__":
     print(f"[Music Separate Engine Server] start listen on {1201}")
