@@ -1,6 +1,5 @@
 from utils.request import get_youtube_url
 from services.VideoService import VideoService
-import pafy
 import os
 import time
 

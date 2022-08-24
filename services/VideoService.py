@@ -1,4 +1,3 @@
-import pafy
 import os
 import time
 class VideoService:
