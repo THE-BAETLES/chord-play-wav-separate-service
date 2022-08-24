@@ -6,9 +6,9 @@ class VideoService:
 
         self.video_id = video_id
         self.save_folder = save_folder
-        self.save_path = os.path.join(save_folder, video_id + f".{save_extension}")
+        self.save_path = os.path.join(save_folder, video_id + f"before.{save_extension}")
         self.video_url = video_url
-        self.ffmpeg_save_path =  f"{os.path.join(self.save_folder, self.video_id)}after.mp3"
+        self.ffmpeg_save_path =  f"{os.path.join(self.save_folder, self.video_id)}.mp3"
 
     def __enter__(self):
         return self
@@ -46,7 +46,7 @@ class VideoService:
 
         assert os.path.exists(self.save_path) == True
         self.ffmpeg_convert()
-        return self.save_path
+        return self.ffmpeg_save_path
 
     
         
