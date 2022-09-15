@@ -13,7 +13,7 @@ output_wav_save_path= os.environ.get("OUTPUT_WAV_SAVE_PATH")
 listen_port = os.environ.get("SERVER_PORT")
 app = FastAPI()
 @app.get('/separate')
-def separate(videoId: str) -> str:
+async def separate(videoId: str) -> str:
     with VideoService(get_youtube_url(videoId),videoId, input_wav_save_path , "mp3") as v:
         wav_path = v.save_to_volume()
     with SeparateService(wav_path, 16000, videoId, output_path=output_wav_save_path) as s:
@@ -25,9 +25,10 @@ def separate(videoId: str) -> str:
     }
     
     return response
-def test():
-    
-    pass
+
+@app.get('/healthCheck')
+async def test():
+    return "I`m Health Now"
 
 if __name__ == "__main__":
     print(f"[Music Separate Engine Server] start listen on {1201}")
