@@ -11,19 +11,20 @@ global model, audio_loader
 input_wav_save_path = os.environ.get("INPUT_WAV_SAVE_PATH")
 output_wav_save_path= os.environ.get("OUTPUT_WAV_SAVE_PATH")
 listen_port = os.environ.get("SERVER_PORT")
+
 app = FastAPI()
 @app.get('/separate')
 async def separate(videoId: str) -> str:
     with VideoService(get_youtube_url(videoId),videoId, input_wav_save_path , "mp3") as v:
         wav_path = v.save_to_volume()
+        
     with SeparateService(wav_path, 16000, videoId, output_path=output_wav_save_path) as s:
         accompaniment_path = s.separate()
-
+        
     response = {
         "accompanimentPath": accompaniment_path,
         "videoId": videoId
     }
-    
     return response
 
 @app.get('/healthCheck')
