@@ -1,2 +1,7 @@
+# models
 ./pretrained_models/*
 pretrained_models/*
+
+# cache
+__pycache__/*
+**/__pycache__
